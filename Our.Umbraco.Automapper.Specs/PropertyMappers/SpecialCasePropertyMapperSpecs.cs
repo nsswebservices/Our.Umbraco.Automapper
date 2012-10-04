@@ -1,7 +1,7 @@
 ﻿using System;
 using Machine.Specifications;
-using Our.Umbraco.Automapper.Framework.Attributes;
-using Our.Umbraco.Automapper.Framework.Mappers;
+using Our.Umbraco.Automapper.Attributes;
+using Our.Umbraco.Automapper.Mappers;
 
 namespace Our.Umbraco.Automapper.Specs.PropertyMappers
 {

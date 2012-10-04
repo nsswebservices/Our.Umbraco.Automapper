@@ -1,5 +1,5 @@
 using System;
-using Our.Umbraco.Automapper.Framework.Mappers;
+using Our.Umbraco.Automapper.Mappers;
 
 namespace Our.Umbraco.Automapper.Specs.PropertyMappers
 {

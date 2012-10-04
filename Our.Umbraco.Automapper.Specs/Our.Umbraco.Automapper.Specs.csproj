@@ -69,6 +69,7 @@
     <Compile Include="PropertyMappers\PropertyMapperTestHelper.cs" />
     <Compile Include="PropertyMappers\SpecialCasePropertyMapperSpecs.cs" />
     <Compile Include="TestProperty.cs" />
+    <Compile Include="ValueBuilderSpecs.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

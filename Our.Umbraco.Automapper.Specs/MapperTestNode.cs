@@ -20,7 +20,11 @@ namespace Our.Umbraco.Automapper.Specs
 
         public IProperty GetProperty(string Alias)
         {
-            Console.WriteLine(Alias);
+            if (!propsValues.ContainsKey(Alias))
+            {
+                return new TestProperty(Alias, null);
+            }
+
             return new TestProperty(Alias, propsValues[Alias]);
         }
 

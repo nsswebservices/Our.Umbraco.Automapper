@@ -1,4 +1,4 @@
-﻿using Our.Umbraco.Automapper.Framework.Attributes;
+﻿using Our.Umbraco.Automapper.Attributes;
 
 namespace Our.Umbraco.Automapper.Domain
 {

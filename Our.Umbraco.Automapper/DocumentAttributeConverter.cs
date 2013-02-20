@@ -6,30 +6,20 @@ namespace Our.Umbraco.Automapper
 {
     public class DocumentAttributeConverter<TDestination> : TypeConverter<INode, TDestination> where TDestination : new()
     {
-        private readonly IPropertyMapper propertyMapper;
+        private readonly IPropertyMapperPipeline<TDestination> mapperPipeline;
 
-        public DocumentAttributeConverter(IPropertyMapper propertyMapper)
+        public DocumentAttributeConverter(IPropertyMapperPipeline<TDestination> mapperPipeline)
         {
-            this.propertyMapper = propertyMapper;
+            this.mapperPipeline = mapperPipeline;
         }
 
         protected override TDestination ConvertCore(INode source)
         {
             var destination = new TDestination();
 
-            MapPropertiesFromAttributes(destination, source);
+            mapperPipeline.Map(destination, source);
 
             return destination;
-        }
-
-        protected void MapPropertiesFromAttributes(TDestination dest, INode source)
-        {
-            var properties = typeof (TDestination).GetProperties();
-
-            foreach (var propertyInfo in properties)
-            {
-                propertyMapper.Map(dest, source, propertyInfo);
-            }
         }
     }
 }

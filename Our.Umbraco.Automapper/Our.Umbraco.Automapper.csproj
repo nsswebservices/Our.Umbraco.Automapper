@@ -250,6 +250,9 @@
     <Compile Include="Mappers\ShouldIgnorePropertyMapper.cs" />
     <Compile Include="Mappers\SpecialCasePropertyMapper.cs" />
     <Compile Include="NodeTypes.cs" />
+    <Compile Include="IPropertyMapperPipeline.cs" />
+    <Compile Include="Pipelines.cs" />
+    <Compile Include="PropertyMapperPipeline.cs" />
     <Compile Include="ValueBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

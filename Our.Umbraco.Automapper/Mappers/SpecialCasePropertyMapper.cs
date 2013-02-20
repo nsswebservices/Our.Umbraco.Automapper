@@ -47,7 +47,7 @@ namespace Our.Umbraco.Automapper.Mappers
             if (propAtt == null)
                 return specialCases.ContainsKey(propertyInfo.Name);
 
-            return specialCases.ContainsKey(propAtt.PropertyAlias);
+            return !string.IsNullOrEmpty(propAtt.PropertyAlias) && specialCases.ContainsKey(propAtt.PropertyAlias);
         }
     }
 }

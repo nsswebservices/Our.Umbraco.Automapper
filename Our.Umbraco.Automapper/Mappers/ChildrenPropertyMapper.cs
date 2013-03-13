@@ -24,10 +24,12 @@ namespace Our.Umbraco.Automapper.Mappers
 
             var childrenAsList = source.Children.ToList();
 
-            if (!string.IsNullOrEmpty(attr.NodeTypeAlias))
-                childrenAsList = childrenAsList.Where(x => !string.IsNullOrEmpty(x.DocumentTypeAlias) 
-                    && x.DocumentTypeAlias.Equals(attr.NodeTypeAlias, StringComparison.InvariantCultureIgnoreCase))
-                    .ToList();
+            if (!string.IsNullOrEmpty(attr.DocumentTypeAlias))
+            {
+                var nodeTypes = attr.DocumentTypeAlias.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+
+                childrenAsList = childrenAsList.Where(x => nodeTypes.Contains(x.DocumentTypeAlias)).ToList();
+            }
 
             var mapped = MappingAction(propertyInfo, childrenAsList);
 

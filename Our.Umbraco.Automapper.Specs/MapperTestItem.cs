@@ -11,7 +11,7 @@ namespace Our.Umbraco.Automapper.Specs
         [MapFromChildren]
         public IEnumerable<MapperTestItem> SomeKids { get; set; }
 
-        [MapFromChildren(NodeTypeAlias = "Filtered")]
+        [MapFromChildren(DocumentTypeAlias = "Filtered")]
         public IEnumerable<MapperTestItem> FilteredKids { get; set; }
 
         [UmbracoProperty]

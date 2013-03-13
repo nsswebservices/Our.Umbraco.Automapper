@@ -1,18 +1,19 @@
 using System.Reflection;
+using Inflector;
 using Our.Umbraco.Automapper.Attributes;
 using Our.Umbraco.Automapper.Extensions;
-using umbraco.interfaces;
+using Umbraco.Core.Models;
 
 namespace Our.Umbraco.Automapper.Mappers
 {
     public class UmbracoPropertyAttributePropertyMapper : AbstractPropertyMapper
     {
-        protected override void MapCore<TDestination>(TDestination dest, INode source, PropertyInfo propertyInfo)
+        protected override void MapCore<TDestination>(TDestination dest, IPublishedContent source, PropertyInfo propertyInfo)
         {
             var propAtt = propertyInfo.GetAttribute<UmbracoPropertyAttribute>();
             var propName = !string.IsNullOrEmpty(propAtt.PropertyAlias)
                                ? propAtt.PropertyAlias
-                               : Inflector.Inflector.Camelize(propertyInfo.Name);
+                               : propertyInfo.Name.Camelize();
 
             object value = new ValueBuilder(source.GetProperty(propName), propertyInfo, propAtt.IsPreValue).GetValue();
             propertyInfo.SetValue(dest, value, null);

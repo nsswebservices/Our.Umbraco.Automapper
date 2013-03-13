@@ -6,9 +6,10 @@ using AutoMapper;
 using Inflector;
 using Our.Umbraco.Automapper.Attributes;
 using Our.Umbraco.Automapper.Extensions;
+using Umbraco.Core.Models;
 using umbraco.NodeFactory;
-using umbraco.cms.businesslogic.media;
 using umbraco.interfaces;
+using Media = umbraco.cms.businesslogic.media.Media;
 
 namespace Our.Umbraco.Automapper.Mappers
 {
@@ -16,7 +17,7 @@ namespace Our.Umbraco.Automapper.Mappers
     {
         private MapFromMultiNodeAttribute attr;
 
-        protected override void MapCore<TDestination>(TDestination dest, INode source, PropertyInfo propertyInfo)
+        protected override void MapCore<TDestination>(TDestination dest, IPublishedContent source, PropertyInfo propertyInfo)
         {
             attr = propertyInfo.GetAttribute<MapFromMultiNodeAttribute>();
 

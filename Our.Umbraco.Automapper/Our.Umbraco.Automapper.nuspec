@@ -1,0 +1,15 @@
+﻿<?xml version="1.0"?>
+<package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <authors>Chris Canal</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$id$ Stuff, oooooh yea</description>
+    <language>en-GB</language>
+    <copyright>Chris Canal, Storm ID Ltd.</copyright>
+    <tags></tags>
+    <iconUrl>http://stormid.com/media/48267/logo.jpg</iconUrl>
+  </metadata>
+
+</package>

@@ -1,10 +1,11 @@
 ﻿using AutoMapper;
 using Our.Umbraco.Automapper.Mappers;
+using Umbraco.Core.Models;
 using umbraco.interfaces;
 
 namespace Our.Umbraco.Automapper
 {
-    public class DocumentAttributeConverter<TDestination> : TypeConverter<INode, TDestination> where TDestination : new()
+    public class DocumentAttributeConverter<TDestination> : TypeConverter<IPublishedContent, TDestination> where TDestination : new()
     {
         private readonly IPropertyMapperPipeline<TDestination> mapperPipeline;
 
@@ -13,7 +14,7 @@ namespace Our.Umbraco.Automapper
             this.mapperPipeline = mapperPipeline;
         }
 
-        protected override TDestination ConvertCore(INode source)
+        protected override TDestination ConvertCore(IPublishedContent source)
         {
             var destination = new TDestination();
 

@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
-using umbraco.cms.businesslogic.media;
+using Umbraco.Core.Models;
 using umbraco.interfaces;
+using Media = umbraco.cms.businesslogic.media.Media;
 
 namespace Our.Umbraco.Automapper.Extensions
 {
@@ -18,6 +19,20 @@ namespace Our.Umbraco.Automapper.Extensions
         }
 
         public static string GetPropertyValueOrEmpty(this INode node, string alias)
+        {
+            var prop = node.GetPropertyValue(alias);
+
+            return prop == null ? string.Empty : prop.ToString();
+        }
+
+        public static object GetPropertyValue(this IPublishedContent node, string alias)
+        {
+            var prop = node.GetProperty(alias);
+
+            return prop == null ? null : prop.Value;
+        }
+
+        public static string GetPropertyValueOrEmpty(this IPublishedContent node, string alias)
         {
             var prop = node.GetPropertyValue(alias);
 

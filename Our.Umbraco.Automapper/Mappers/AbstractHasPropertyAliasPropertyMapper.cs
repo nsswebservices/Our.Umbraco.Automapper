@@ -2,6 +2,7 @@ using System;
 using System.Reflection;
 using Our.Umbraco.Automapper.Attributes;
 using Our.Umbraco.Automapper.Extensions;
+using Umbraco.Core.Models;
 using umbraco.interfaces;
 
 namespace Our.Umbraco.Automapper.Mappers
@@ -15,7 +16,7 @@ namespace Our.Umbraco.Automapper.Mappers
                    propertyInfo.PropertyType.CanBeCastTo<TProperty>();
         }
 
-        protected override void MapCore<TDestination>(TDestination dest, INode source, PropertyInfo propertyInfo)
+        protected override void MapCore<TDestination>(TDestination dest, IPublishedContent source, PropertyInfo propertyInfo)
         {
             var att = propertyInfo.GetAttribute<TAttribute>();
 

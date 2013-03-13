@@ -1,12 +1,13 @@
 using System.Reflection;
 using Inflector;
+using Umbraco.Core.Models;
 using umbraco.interfaces;
 
 namespace Our.Umbraco.Automapper.Mappers
 {
     public class DefaultPropertyMapper : AbstractPropertyMapper
     {
-        protected override void MapCore<TDestination>(TDestination dest, INode source, PropertyInfo propertyInfo)
+        protected override void MapCore<TDestination>(TDestination dest, IPublishedContent source, PropertyInfo propertyInfo)
         {
             var propName = propertyInfo.Name.Camelize();
             var prop = source.GetProperty(propName);

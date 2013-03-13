@@ -5,24 +5,28 @@ using System.Reflection;
 using AutoMapper;
 using Our.Umbraco.Automapper.Attributes;
 using Our.Umbraco.Automapper.Extensions;
+using Umbraco.Core.Models;
 using umbraco.interfaces;
 
 namespace Our.Umbraco.Automapper.Mappers
 {
-    public delegate object ChildrenPropertyMapping(PropertyInfo propertyInfo, List<INode> childrenAsList);
+    public delegate object ChildrenPropertyMapping(PropertyInfo propertyInfo, List<IPublishedContent> childrenAsList);
 
     public class ChildrenPropertyMapper : AbstractPropertyMapper
     {
-        public ChildrenPropertyMapping MappingAction = (p, c) => Mapper.Map(c, typeof (List<INode>), p.PropertyType);
+        public ChildrenPropertyMapping MappingAction = (p, c) => Mapper.Map(c, typeof(List<IPublishedContent>), p.PropertyType);
 
-        protected override void MapCore<TDestination>(TDestination dest, INode source, PropertyInfo propertyInfo)
+        protected override void MapCore<TDestination>(TDestination dest, IPublishedContent source, PropertyInfo propertyInfo)
         {
             var attr = propertyInfo.GetAttribute<MapFromChildrenAttribute>();
-            var childrenAsList = source.ChildrenAsList;
+
+            if (source.Children == null || !source.Children.Any()) return;
+
+            var childrenAsList = source.Children.ToList();
 
             if (!string.IsNullOrEmpty(attr.NodeTypeAlias))
-                childrenAsList = childrenAsList.Where(x => !string.IsNullOrEmpty(x.NodeTypeAlias) 
-                    && x.NodeTypeAlias.Equals(attr.NodeTypeAlias, StringComparison.InvariantCultureIgnoreCase))
+                childrenAsList = childrenAsList.Where(x => !string.IsNullOrEmpty(x.DocumentTypeAlias) 
+                    && x.DocumentTypeAlias.Equals(attr.NodeTypeAlias, StringComparison.InvariantCultureIgnoreCase))
                     .ToList();
 
             var mapped = MappingAction(propertyInfo, childrenAsList);

@@ -21,9 +21,9 @@ namespace Our.Umbraco.Automapper.Specs.PropertyMappers
                                             node = new MapperTestNode()
                                                        {
                                                            Id = 1234,
-                                                           NiceUrl = "/expected",
+                                                           Url = "/expected",
                                                            Name = "Name",
-                                                           NodeTypeAlias = "NodeTypeAlias",
+                                                           DocumentTypeAlias = "NodeTypeAlias",
                                                            CreateDate = createDate,
                                                            Level = 12,
                                                            Parent = new MapperTestNode() {Name = "Parent Name"}
@@ -74,9 +74,9 @@ namespace Our.Umbraco.Automapper.Specs.PropertyMappers
             node = new MapperTestNode()
             {
                 Id = 1234,
-                NiceUrl = "/expected",
+                Url = "/expected",
                 Name = "Name",
-                NodeTypeAlias = "NodeTypeAlias",
+                DocumentTypeAlias = "NodeTypeAlias",
                 CreateDate = createDate,
                 Level = 12,
                 Parent = new MapperTestNode() { Name = "Parent Name" }

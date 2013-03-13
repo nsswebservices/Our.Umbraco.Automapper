@@ -16,11 +16,11 @@ namespace Our.Umbraco.Automapper.Specs.PropertyMappers
                                             mapper.MappingAction = (info, list) => Enumerable.Range(0, list.Count).Select(x => new MapperTestItem());
                                             testHelper = new PropertyMapperTestHelper(mapper,
                                                                                       x =>
-                                                                                      x.ChildrenAsList.AddRange(new[]
+                                                                                      x.Children = new[]
                                                                                     {
                                                                                         new MapperTestNode(),
-                                                                                        new MapperTestNode() {NodeTypeAlias = "Filtered"},
-                                                                                    }), "SomeKids");
+                                                                                        new MapperTestNode() {DocumentTypeAlias = "Filtered"},
+                                                                                    }, "SomeKids");
                                         };
 
         private Because of = () => testHelper.Execute();
@@ -40,11 +40,11 @@ namespace Our.Umbraco.Automapper.Specs.PropertyMappers
             mapper.MappingAction = (info, list) => Enumerable.Range(0, list.Count).Select(x => new MapperTestItem());
             testHelper = new PropertyMapperTestHelper(mapper,
                                                       x =>
-                                                      x.ChildrenAsList.AddRange(new[]
+                                                      x.Children = new[]
                                                                                     {
                                                                                         new MapperTestNode(),
-                                                                                        new MapperTestNode() {NodeTypeAlias = "Filtered"},
-                                                                                    }), "FilteredKids");
+                                                                                        new MapperTestNode() {DocumentTypeAlias = "Filtered"},
+                                                                                    }, "FilteredKids");
         };
 
         private Because of = () => testHelper.Execute();

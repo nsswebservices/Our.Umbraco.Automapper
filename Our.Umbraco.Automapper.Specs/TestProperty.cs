@@ -1,9 +1,9 @@
 using System;
-using umbraco.interfaces;
+using Umbraco.Core.Models;
 
 namespace Our.Umbraco.Automapper.Specs
 {
-    public class TestProperty : IProperty
+    public class TestProperty : IPublishedContentProperty
     {
         private string value;
 
@@ -11,16 +11,15 @@ namespace Our.Umbraco.Automapper.Specs
         {
             Alias = alias;
             PropsValue = propsValue;
-
         }
 
         public string Alias { get; private set; }
 
         public object PropsValue { get; set; }
 
-        public string Value
+        public object Value
         {
-            get { return (PropsValue ?? "").ToString(); }
+            get { return (PropsValue ?? ""); }
         }
 
         public Guid Version { get; private set; }

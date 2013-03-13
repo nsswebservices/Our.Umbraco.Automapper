@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Umbraco.Core.Models;
 using umbraco.cms.businesslogic.datatype;
 using umbraco.interfaces;
 
@@ -9,11 +10,11 @@ namespace Our.Umbraco.Automapper
 {
     public class ValueBuilder
     {
-        private readonly IProperty nodeProperty;
+        private readonly IPublishedContentProperty nodeProperty;
         private readonly PropertyInfo propertyInfo;
         private readonly bool isPreValue;
 
-        public ValueBuilder(IProperty nodeProperty, PropertyInfo propertyInfo, bool isPreValue)
+        public ValueBuilder(IPublishedContentProperty nodeProperty, PropertyInfo propertyInfo, bool isPreValue)
         {
             this.nodeProperty = nodeProperty;
             this.propertyInfo = propertyInfo;
@@ -22,14 +23,14 @@ namespace Our.Umbraco.Automapper
 
         public object GetValue()
         {
-            if (nodeProperty == null || string.IsNullOrEmpty(nodeProperty.Value))
+            if (nodeProperty == null || nodeProperty.Value == null || string.IsNullOrEmpty(nodeProperty.Value.ToString()))
             {
                 return null;
             }
 
             if (propertyInfo.PropertyType == typeof(bool))
             {
-                if (nodeProperty.Value == "1") return true;
+                if (nodeProperty.Value.ToString() == "1") return true;
 
                 return false;
             }
@@ -38,14 +39,14 @@ namespace Our.Umbraco.Automapper
             {
                 int output;
 
-                return int.TryParse(nodeProperty.Value, out output) ? output : 0;
+                return int.TryParse(nodeProperty.Value.ToString(), out output) ? output : 0;
             }
 
             if (propertyInfo.PropertyType == typeof(decimal))
             {
                 decimal output;
 
-                return decimal.TryParse(nodeProperty.Value, out output) ? output : 0;
+                return decimal.TryParse(nodeProperty.Value.ToString(), out output) ? output : 0;
             }
 
             var isCollection = typeof(IEnumerable<string>).IsAssignableFrom(propertyInfo.PropertyType);
@@ -56,7 +57,7 @@ namespace Our.Umbraco.Automapper
             {
                 if (isCollection)
                 {
-                    var ids = nodeProperty.Value.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+                    var ids = nodeProperty.Value.ToString().Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries);
                     var vals = ids.Select(x =>
                                               {
                                                   int number;
@@ -66,18 +67,18 @@ namespace Our.Umbraco.Automapper
                     return vals.ToArray();
                 }
 
-                return new PreValue(int.Parse(nodeProperty.Value)).Value;
+                return new PreValue(int.Parse(nodeProperty.Value.ToString())).Value;
             }
             //ncrunch: no coverage end
 
-            if (isCollection && nodeProperty.Value.Contains(","))
+            if (isCollection && nodeProperty.Value.ToString().Contains(","))
             {
-                return nodeProperty.Value.Split(new[] {","}, StringSplitOptions.RemoveEmptyEntries);
+                return nodeProperty.Value.ToString().Split(new[] {","}, StringSplitOptions.RemoveEmptyEntries);
             }
 
             if ( propertyInfo.PropertyType == typeof(DateTime))
             {
-                return DateTime.Parse(nodeProperty.Value);
+                return DateTime.Parse(nodeProperty.Value.ToString());
             }
 
             return nodeProperty.Value;

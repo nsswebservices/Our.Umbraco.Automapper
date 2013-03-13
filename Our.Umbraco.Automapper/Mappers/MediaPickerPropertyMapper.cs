@@ -2,8 +2,9 @@ using System.Reflection;
 using Inflector;
 using Our.Umbraco.Automapper.Attributes;
 using Our.Umbraco.Automapper.Extensions;
-using umbraco.cms.businesslogic.media;
+using Umbraco.Core.Models;
 using umbraco.interfaces;
+using Media = umbraco.cms.businesslogic.media.Media;
 
 namespace Our.Umbraco.Automapper.Mappers
 {
@@ -14,7 +15,7 @@ namespace Our.Umbraco.Automapper.Mappers
             return propertyInfo.HasAttribute<MapFromMediaPickerAttribute>();
         }
 
-        protected override void MapCore<TDestination>(TDestination dest, INode source, PropertyInfo propertyInfo)
+        protected override void MapCore<TDestination>(TDestination dest, IPublishedContent source, PropertyInfo propertyInfo)
         {
             var attr = propertyInfo.GetAttribute<MapFromMediaPickerAttribute>();
 

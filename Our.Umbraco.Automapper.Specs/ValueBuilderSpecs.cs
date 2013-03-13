@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Machine.Specifications;
+using Umbraco.Core.Models;
 using umbraco.interfaces;
 
 namespace Our.Umbraco.Automapper.Specs
@@ -139,7 +140,7 @@ namespace Our.Umbraco.Automapper.Specs
             return typeof(ValueBuilderTarget).GetProperty(propName);
         }
 
-        private static IProperty GetUmbracoProperty<T>(Tuple<string, T> propValue)
+        private static IPublishedContentProperty GetUmbracoProperty<T>(Tuple<string, T> propValue)
         {
             return new TestProperty(propValue.Item1, propValue.Item2);
         }

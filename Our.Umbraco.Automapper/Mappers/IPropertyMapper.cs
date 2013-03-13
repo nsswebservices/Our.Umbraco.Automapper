@@ -1,14 +1,11 @@
 using System.Reflection;
-using umbraco.interfaces;
+using Umbraco.Core.Models;
 
 namespace Our.Umbraco.Automapper.Mappers
 {
     public interface IPropertyMapper
     {
-        IPropertyMapper Next { get; }
-
-        void Map<TDestination>(TDestination dest, INode source, PropertyInfo propertyInfo);
+        void Map<TDestination>(TDestination dest, IPublishedContent source, PropertyInfo propertyInfo);
         bool CanPerformAction(PropertyInfo propertyInfo);
-        IPropertyMapper SetNext(IPropertyMapper n);
     }
 }

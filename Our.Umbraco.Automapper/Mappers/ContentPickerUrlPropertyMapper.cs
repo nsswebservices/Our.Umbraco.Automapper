@@ -2,13 +2,14 @@ using System.Reflection;
 using Inflector;
 using Our.Umbraco.Automapper.Attributes;
 using Our.Umbraco.Automapper.Extensions;
+using Umbraco.Core.Models;
 using umbraco.interfaces;
 
 namespace Our.Umbraco.Automapper.Mappers
 {
     public class ContentPickerUrlPropertyMapper : AbstractPropertyMapper
     {
-        protected override void MapCore<TDestination>(TDestination dest, INode source, PropertyInfo propertyInfo)
+        protected override void MapCore<TDestination>(TDestination dest, IPublishedContent source, PropertyInfo propertyInfo)
         {
             var attr = propertyInfo.GetAttribute<MapFromContentPickerUrlAttribute>();
             var propName = string.IsNullOrWhiteSpace(attr.PropertyAlias) ? propertyInfo.Name.Camelize() : attr.PropertyAlias;

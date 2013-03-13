@@ -38,23 +38,4 @@ namespace Our.Umbraco.Automapper.Specs.PropertyMappers
 
         private It should_not_be_able_to = () => exception.ShouldBeOfType<InvalidOperationException>();
     }
-
-
-    [Subject(typeof(EmptyPropertyMapper))]
-    public class when_setting_next
-    {
-        private static EmptyPropertyMapper mapper;
-        private static Exception exception;
-
-        private Establish context = () =>
-        {
-            mapper = new EmptyPropertyMapper();
-        };
-
-        private Because of = () => exception = Catch.Exception(() => mapper.SetNext(new EmptyPropertyMapper()));
-
-        private It should_throw_an_exception = () => exception.ShouldNotBeNull();
-
-        private It should_not_be_able_to = () => exception.ShouldBeOfType<InvalidOperationException>();
-    }
 }

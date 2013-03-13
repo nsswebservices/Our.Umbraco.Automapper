@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Our.Umbraco.Automapper.Mappers;
+using Umbraco.Core.Models;
 using umbraco.interfaces;
 
 namespace Our.Umbraco.Automapper
@@ -31,7 +32,7 @@ namespace Our.Umbraco.Automapper
             }
         }
 
-        public void Map(T destination, INode source)
+        public void Map(T destination, IPublishedContent source)
         {
             foreach (var propertyMapper in MapperCache)
             {
